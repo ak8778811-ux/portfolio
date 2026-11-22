@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard – Abhishek Kumar Mehta</title>
+    <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation">☰</button>
+        <div class="mobile-title">Portfolio Admin</div>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+        <div class="sidebar-header">
+            <h2>Abhishek<span>.Admin</span></h2>
+            <p class="sidebar-subtitle">Content Editor</p>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#dashboard" class="active" data-panel="dashboard"><span class="nav-icon">📊</span> Dashboard</a></li>
+                <li><a href="#profile" data-panel="profile"><span class="nav-icon">👤</span> Profile</a></li>
+                <li><a href="#skills" data-panel="skills"><span class="nav-icon">⚡</span> Skills</a></li>
+                <li><a href="#projects" data-panel="projects"><span class="nav-icon">📁</span> Projects</a></li>
+                <li><a href="#services" data-panel="services"><span class="nav-icon">🛠️</span> Services</a></li>
+                <li><a href="#education" data-panel="education"><span class="nav-icon">🎓</span> Education</a></li>
+                <li><a href="#contact" data-panel="contact"><span class="nav-icon">📬</span> Contact</a></li>
+                <li><a href="#resume" data-panel="resume"><span class="nav-icon">📄</span> Resume</a></li>
+                <li><a href="#settings" data-panel="settings"><span class="nav-icon">⚙️</span> Settings</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="index.html" class="view-site-link" target="_blank" rel="noopener noreferrer">↗ View Public Site</a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main" id="admin-main">
+        <!-- Global Persistent Action Toolbar -->
+        <div class="admin-actions-bar">
+            <div class="storage-indicator">
+                <span class="indicator-dot" id="storage-indicator-dot"></span>
+                <span class="indicator-text" id="storage-indicator-text">Storage: data.js (Default)</span>
+            </div>
+            <div class="global-actions">
+                <button type="button" class="btn btn-export btn-sm" id="btn-export-backup" title="Export portfolio data as JSON backup">
+                    <span>📥</span> Export Backup
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-reset-changes" title="Reset all changes back to data.js defaults">
+                    <span>↺</span> Reset Defaults
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="btn-save-changes" title="Save all changes to browser localStorage">
+                    <span>💾</span> Save Changes
+                </button>
+            </div>
+        </div>
+
+        <!-- Dashboard Panel -->
+        <section class="panel active" id="panel-dashboard">
+            <div class="panel-header">
+                <h1 class="welcome" id="welcome-heading">Welcome, Abhishek</h1>
+                <p class="panel-tagline">Portfolio overview, statistics, and local content management</p>
+            </div>
+            
+            <!-- Statistics Cards -->
+            <div class="stats-grid">
+                <div class="card stat-card">
+                    <div class="stat-icon">📁</div>
+                    <div class="stat-info">
+                        <h3>Total Projects</h3>
+                        <p class="stat" id="stat-projects">0</p>
+                        <span class="stat-meta">Active portfolio entries</span>
+                    </div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-info">
+                        <h3>Total Skills</h3>
+                        <p class="stat" id="stat-skills">0</p>
+                        <span class="stat-meta" id="stat-skills-meta">Competency pills</span>
+                    </div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-icon">🛠️</div>
+                    <div class="stat-info">
+                        <h3>Total Services</h3>
+                        <p class="stat" id="stat-services">0</p>
+                        <span class="stat-meta">Offered capabilities</span>
+                    </div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-icon">🎓</div>
+                    <div class="stat-info">
+                        <h3>Total Education</h3>
+                        <p class="stat" id="stat-education">0</p>
+                        <span class="stat-meta">Academic milestones</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard 2-Column Overview -->
+            <div class="dashboard-grid">
+                <div class="card dash-card">
+                    <div class="card-header">
+                        <h3>Profile Snapshot</h3>
+                        <span class="status-badge" id="dash-profile-status">Available</span>
+                    </div>
+                    <div id="dash-profile-summary" class="profile-summary"></div>
+                </div>
+
+                <div class="card dash-card">
+                    <div class="card-header">
+                        <h3>Recent Activity</h3>
+                        <span class="badge-dim">Local Log</span>
+                    </div>
+                    <div class="activity-content" id="activity-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Panel -->
+        <section class="panel" id="panel-profile">
+            <div class="panel-header">
+                <div>
+                    <h2>Profile Information</h2>
+                    <p class="panel-tagline">Edit full name, professional title, roles, bio, focus areas, and languages</p>
+                </div>
+            </div>
+            <div id="profile-editor-container"></div>
+        </section>
+
+        <!-- Skills Panel -->
+        <section class="panel" id="panel-skills">
+            <div class="panel-header flex-header">
+                <div>
+                    <h2>Technical Skills</h2>
+                    <p class="panel-tagline">Add, edit, and organize skill categories and individual competencies</p>
+                </div>
+                <button type="button" class="btn btn-primary btn-sm" id="btn-add-category">
+                    <span>+</span> Add Category
+                </button>
+            </div>
+            <div id="skills-editor-container"></div>
+        </section>
+
+        <!-- Projects Panel -->
+        <section class="panel" id="panel-projects">
+            <div class="panel-header flex-header">
+                <div>
+                    <h2>Featured Projects</h2>
+                    <p class="panel-tagline">Add, edit, or delete portfolio project entries</p>
+                </div>
+                <button type="button" class="btn btn-primary btn-sm" id="btn-add-project">
+                    <span>+</span> Add Project
+                </button>
+            </div>
+            <div id="projects-editor-container"></div>
+        </section>
+
+        <!-- Services Panel -->
+        <section class="panel" id="panel-services">
+            <div class="panel-header flex-header">
+                <div>
+                    <h2>Services & Capabilities</h2>
+                    <p class="panel-tagline">Manage services, descriptions, and iconography</p>
+                </div>
+                <button type="button" class="btn btn-primary btn-sm" id="btn-add-service">
+                    <span>+</span> Add Service
+                </button>
+            </div>
+            <div id="services-editor-container"></div>
+        </section>
+
+        <!-- Education Panel -->
+        <section class="panel" id="panel-education">
+            <div class="panel-header flex-header">
+                <div>
+                    <h2>Education History</h2>
+                    <p class="panel-tagline">Manage academic qualifications and institutional milestones</p>
+                </div>
+                <button type="button" class="btn btn-primary btn-sm" id="btn-add-education">
+                    <span>+</span> Add Education
+                </button>
+            </div>
+            <div id="education-editor-container"></div>
+        </section>
+
+        <!-- Contact Panel -->
+        <section class="panel" id="panel-contact">
+            <div class="panel-header">
+                <div>
+                    <h2>Contact & Communication Channels</h2>
+                    <p class="panel-tagline">Edit verified direct email, WhatsApp, and LinkedIn URLs</p>
+                </div>
+            </div>
+            <div id="contact-editor-container"></div>
+        </section>
+
+        <!-- Resume Panel -->
+        <section class="panel" id="panel-resume">
+            <div class="panel-header">
+                <div>
+                    <h2>Curriculum Vitae</h2>
+                    <p class="panel-tagline">Resume document path and public availability status</p>
+                </div>
+            </div>
+            <div id="resume-editor-container"></div>
+        </section>
+
+        <!-- Settings Panel -->
+        <section class="panel" id="panel-settings">
+            <div class="panel-header">
+                <div>
+                    <h2>System Settings & Backup</h2>
+                    <p class="panel-tagline">Storage backend status, local persistence controls, and data export</p>
+                </div>
+            </div>
+            <div id="settings-editor-container"></div>
+        </section>
+    </main>
+
+    <!-- Reusable Modal Dialog for Add/Edit Operations -->
+    <div id="admin-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-card card">
+            <div class="modal-header">
+                <h3 id="modal-title">Edit Item</h3>
+                <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">✕</button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="modal-cancel-btn">Cancel</button>
+                <button type="button" class="btn btn-primary" id="modal-save-btn">Apply Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <!-- Data source & Admin Controller Scripts -->
+    <script src="data.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
